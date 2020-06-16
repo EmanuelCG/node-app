@@ -1,0 +1,41 @@
+{{#if user}}
+<div class="jumbotron">
+    <p class="lead">Welcome to the Notes {{ user.name}}</p>
+</div>
+{{/if}}
+<div class="row">
+    {{#each notes}}
+    <div class="col-md-4 d-flex justify-content-between p-1">
+        <div class="col-md-11 m-1 p-1 body-note">
+            <div class="row">
+                <div class="col-md-10">
+                    <h5 class="card-title d-flex justify-content-between align-items-center">
+                        {{title}}
+                    </h5>
+                </div>
+                <div class="col-md-2">
+                    <a href="/notes/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <p>{{description}}</p>
+                    <form action="/notes/delete/{{_id}}?_method=DELETE" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger btn-block btn-sm" type="submmit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="card mx-auto mt-4">
+        <div class="card-body">
+            <p class="lead">
+                The are not notes yet
+            </p>
+            <a href="/notes/add" class="btn btn-success btn-block"> Create one !</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
